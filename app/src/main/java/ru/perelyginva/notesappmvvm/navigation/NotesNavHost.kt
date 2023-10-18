@@ -4,18 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ru.perelyginva.notesappmvvm.screens.Add
-import ru.perelyginva.notesappmvvm.screens.Main
-import ru.perelyginva.notesappmvvm.screens.Note
-import ru.perelyginva.notesappmvvm.screens.Start
+import ru.perelyginva.notesappmvvm.screens.AddScreen
+import ru.perelyginva.notesappmvvm.screens.MainScreen
+import ru.perelyginva.notesappmvvm.screens.NoteScreen
+import ru.perelyginva.notesappmvvm.screens.StartScreen
 
 /** создали ссылки на экраны и маршруты*/
 
 sealed class NavRoute(val route: String) {
-    object Start : NavRoute("start_screen")
-    object Main : NavRoute("main_screen")
-    object Add : NavRoute("add_screen")
-    object Note : NavRoute("note_screen")
+    object StartScreen : NavRoute("start_screen")
+    object MainScreen : NavRoute("main_screen")
+    object AddScreen : NavRoute("add_screen")
+    object NoteScreen : NavRoute("note_screen")
 }
 
 
@@ -26,12 +26,12 @@ fun NotesNavHost() {
     //создаем NavHost
     NavHost(
         navController = navController,
-        startDestination = NavRoute.Start.route
+        startDestination = NavRoute.StartScreen.route
     ) {
         //реализуем навигацию
-        composable(NavRoute.Start.route) {Start(navController = navController)}
-        composable(NavRoute.Main.route) { Main(navController = navController)}
-        composable(NavRoute.Add.route) { Add(navController = navController)}
-        composable(NavRoute.Note.route) { Note(navController = navController)}
+        composable(NavRoute.StartScreen.route) {StartScreen(navController = navController) }
+        composable(NavRoute.MainScreen.route) {MainScreen(navController = navController)}
+        composable(NavRoute.AddScreen.route) {AddScreen(navController = navController)}
+        composable(NavRoute.NoteScreen.route) {NoteScreen(navController = navController)}
     }
 }

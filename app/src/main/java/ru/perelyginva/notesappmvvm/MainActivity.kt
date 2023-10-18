@@ -12,6 +12,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import ru.perelyginva.notesappmvvm.navigation.NotesNavHost
@@ -30,7 +32,6 @@ class MainActivity : ComponentActivity() {
                             title = {
                                 Text(text = "Notes App")
                             },
-                            backgroundColor = Color.Blue,
                             contentColor = Color.White,
                             elevation = 12.dp
                         )
