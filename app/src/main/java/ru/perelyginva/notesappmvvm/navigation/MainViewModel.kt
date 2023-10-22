@@ -5,6 +5,9 @@ import android.provider.ContactsContract.CommonDataKinds.Note
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.perelyginva.notesappmvvm.database.room.AppRoomDatabase
 import ru.perelyginva.notesappmvvm.database.room.reposotory.RoomRepository
 import ru.perelyginva.notesappmvvm.model.NoteModel
@@ -28,5 +31,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
+    fun addNote(note: NoteModel, onSuccess: () -> Unit){
+        viewModelScope.launch(Dispatchers.IO) {
+            REPOSITORY.createNote(note = note){
+                viewModelScope.launch(Dispatchers.Main) {
+                    onSuccess()
+                }
+            }
+        }
+    }
+
+    fun readAllNotes() = REPOSITORY.readAll
 }
 

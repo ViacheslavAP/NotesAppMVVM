@@ -20,7 +20,7 @@ sealed class NavRoute(val route: String) {
 
 
 @Composable
-fun NotesNavHost() {
+fun NotesNavHost(mViewModel: MainViewModel) {
     //проинициализируем navController
     val navController = rememberNavController()
     //создаем NavHost
@@ -29,9 +29,29 @@ fun NotesNavHost() {
         startDestination = NavRoute.StartScreen.route
     ) {
         //реализуем навигацию
-        composable(NavRoute.StartScreen.route) {StartScreen(navController = navController) }
-        composable(NavRoute.MainScreen.route) {MainScreen(navController = navController)}
-        composable(NavRoute.AddScreen.route) {AddScreen(navController = navController)}
-        composable(NavRoute.NoteScreen.route) {NoteScreen(navController = navController)}
+        composable(NavRoute.StartScreen.route) {
+            StartScreen(
+                navController = navController,
+                viewModel = mViewModel
+            )
+        }
+        composable(NavRoute.MainScreen.route) {
+            MainScreen(
+                navController = navController,
+                viewModel = mViewModel
+            )
+        }
+        composable(NavRoute.AddScreen.route) {
+            AddScreen(
+                navController = navController,
+                viewModel = mViewModel
+            )
+        }
+        composable(NavRoute.NoteScreen.route) {
+            NoteScreen(
+                navController = navController,
+                viewModel = mViewModel
+            )
+        }
     }
 }
