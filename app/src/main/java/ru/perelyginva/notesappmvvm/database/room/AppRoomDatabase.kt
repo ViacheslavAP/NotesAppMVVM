@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ru.perelyginva.notesappmvvm.R
 import ru.perelyginva.notesappmvvm.database.room.dao.NoteRoomDao
 import ru.perelyginva.notesappmvvm.model.NoteModel
 
@@ -21,7 +22,7 @@ abstract class AppRoomDatabase(): RoomDatabase() {
                 INSTANCE = Room.databaseBuilder(
                     context,
                     AppRoomDatabase::class.java,
-                    "note_database").build()
+                    context.getString(R.string.note_database)).build()
                 INSTANCE as AppRoomDatabase
             } else{
                     INSTANCE as AppRoomDatabase

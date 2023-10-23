@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import ru.perelyginva.notesappmvvm.R
 import ru.perelyginva.notesappmvvm.model.NoteModel
 import ru.perelyginva.notesappmvvm.navigation.MainViewModel
 import ru.perelyginva.notesappmvvm.navigation.MainViewModelFactory
@@ -45,7 +47,7 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
         }) {
             Icon(
                 imageVector = Icons.Filled.Add,
-                contentDescription = "Add icons",
+                contentDescription = stringResource(R.string.add_icons),
                 tint = Color.White
             )
         }
@@ -67,7 +69,8 @@ fun NoteItem(noteModel: NoteModel, navController: NavHostController) {
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 24.dp)
             .clickable {
-                navController.navigate(NavRoute.NoteScreen.route)
+                navController.navigate(
+                    NavRoute.NoteScreen.route + "/${noteModel.id}")
             },
         elevation = 6.dp
     ) {

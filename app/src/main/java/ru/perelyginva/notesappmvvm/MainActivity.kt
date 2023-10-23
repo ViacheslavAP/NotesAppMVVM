@@ -37,13 +37,13 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             title = {
-                                Text(text = "Notes App")
+                                Text(text = getString(R.string.notes_app))
                             },
                             contentColor = Color.White,
                             elevation = 12.dp
                         )
                     },
-                    content = {padding ->
+                    content = { padding ->
                         Surface(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             NotesNavHost(mViewModel)
                         }
-                    } )
+                    })
             }
         }
     }

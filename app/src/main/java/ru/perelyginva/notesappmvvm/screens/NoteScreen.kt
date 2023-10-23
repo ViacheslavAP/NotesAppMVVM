@@ -2,6 +2,7 @@ package ru.perelyginva.notesappmvvm.screens
 
 import android.annotation.SuppressLint
 import android.app.Application
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,9 +11,11 @@ import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,13 +24,23 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import ru.perelyginva.notesappmvvm.R
+import ru.perelyginva.notesappmvvm.model.NoteModel
 import ru.perelyginva.notesappmvvm.navigation.MainViewModel
 import ru.perelyginva.notesappmvvm.navigation.MainViewModelFactory
+import ru.perelyginva.notesappmvvm.navigation.NavRoute
 import ru.perelyginva.notesappmvvm.ui.theme.NotesAppMVVMTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun NoteScreen(navController: NavHostController, viewModel: MainViewModel) {
+fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteId: String?) {
+
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
+    //TODO("разобраться")
+    val note = notes.firstOrNull { it.id == noteId?.toInt() } ?: NoteModel(
+        title = stringResource(R.string.none),
+        subtitle = stringResource(R.string.none)
+    )
 
     Scaffold(
         modifier = Modifier
@@ -51,7 +64,7 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel) {
                 ) {
 
                     Text(
-                        text = "Title",
+                        text = note.title,
                         fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Cursive,
@@ -60,7 +73,7 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel) {
                     )
 
                     Text(
-                        text = "SubTitle",
+                        text = note.subtitle,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -82,7 +95,11 @@ fun prevNoteScreen() {
         val mViewModel: MainViewModel = viewModel(
             factory = MainViewModelFactory(context.applicationContext as Application)
         )
-        NoteScreen(navController = rememberNavController(), viewModel = mViewModel)
+        NoteScreen(
+            navController = rememberNavController(),
+            viewModel = mViewModel,
+            noteId = "1"
+        )
     }
 }
 

@@ -4,18 +4,21 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.perelyginva.notesappmvvm.R
 import ru.perelyginva.notesappmvvm.screens.AddScreen
 import ru.perelyginva.notesappmvvm.screens.MainScreen
 import ru.perelyginva.notesappmvvm.screens.NoteScreen
 import ru.perelyginva.notesappmvvm.screens.StartScreen
+import ru.perelyginva.notesappmvvm.utils.Keys
+import ru.perelyginva.notesappmvvm.utils.Screens
 
 /** создали ссылки на экраны и маршруты*/
 
 sealed class NavRoute(val route: String) {
-    object StartScreen : NavRoute("start_screen")
-    object MainScreen : NavRoute("main_screen")
-    object AddScreen : NavRoute("add_screen")
-    object NoteScreen : NavRoute("note_screen")
+    object StartScreen : NavRoute(Screens.START_SCREEN)
+    object MainScreen : NavRoute(Screens.MAIN_SCREEN)
+    object AddScreen : NavRoute(Screens.ADD_SCREEN)
+    object NoteScreen : NavRoute(Screens.NOTE_SCREEN)
 }
 
 
@@ -47,10 +50,12 @@ fun NotesNavHost(mViewModel: MainViewModel) {
                 viewModel = mViewModel
             )
         }
-        composable(NavRoute.NoteScreen.route) {
+        composable(NavRoute.NoteScreen.route + "/{${Keys.ID}}") {
+            backStackEntry ->
             NoteScreen(
                 navController = navController,
-                viewModel = mViewModel
+                viewModel = mViewModel,
+                noteId = backStackEntry.arguments?.getString(Keys.ID)!!
             )
         }
     }

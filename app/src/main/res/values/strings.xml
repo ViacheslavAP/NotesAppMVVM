@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">NotesAppMVVM</string>
+    <string name="notes_app">Notes App</string>
+    <string name="subtitle">SubTitle</string>
+    <string name="title">Title</string>
+    <string name="add_icons">Add icons</string>
+    <string name="add_new_note">Add new note</string>
+    <string name="note_title">Note title</string>
+    <string name="note_subtitle">Note subTitle</string>
+    <string name="add_note">Add note</string>
+    <string name="note_database">note_database</string>
+    <string name="start_screen">start_screen</string>
+    <string name="id">ID</string>
+    <string name="none">NONE</string>
 </resources>
