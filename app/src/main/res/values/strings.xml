@@ -12,4 +12,10 @@
     <string name="start_screen">start_screen</string>
     <string name="id">ID</string>
     <string name="none">NONE</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="nav_back">Nav Back</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="empty">Empty</string>
+    <string name="update_note">Update note</string>
 </resources>
