@@ -4,7 +4,7 @@ name: Build and Distribute APK
 on:
     push:
       branches:
-      - develop
+      - main
 
 jobs:
   build_apk_aab:
